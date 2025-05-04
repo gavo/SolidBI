@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ETL", "ETL", "{10B72B40-277C-40B8-8C27-33EEA7BC0980}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OLAP", "OLAP", "{C8B1DD68-72BF-4165-83C1-9C2F53955C63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OLTP", "OLTP", "{CA4D2977-7B8C-4DB2-8BE3-21FE0CF5D798}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataWarehouse", "DataWarehouse", "{4EE48AB1-91A1-4F94-B5D6-7B58010AE00C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SolidOLTP", "SolidOLTP\SolidOLTP.sqlproj", "{EAEA41CB-82E8-437B-81AA-D99779C79F70}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SolidDW", "SolidDW\SolidDW.sqlproj", "{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA4D2977-7B8C-4DB2-8BE3-21FE0CF5D798} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4EE48AB1-91A1-4F94-B5D6-7B58010AE00C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EAEA41CB-82E8-437B-81AA-D99779C79F70} = {CA4D2977-7B8C-4DB2-8BE3-21FE0CF5D798}
+		{C2ED0F3B-C94D-435C-B7F0-C52FA9E8BD05} = {4EE48AB1-91A1-4F94-B5D6-7B58010AE00C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60600CEE-C6B3-44AD-A366-546DD7FD3BDD}
+	EndGlobalSection
+EndGlobal
