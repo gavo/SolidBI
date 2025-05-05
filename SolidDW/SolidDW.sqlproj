@@ -71,6 +71,8 @@
     <Build Include="Schema\Tables\dbo\DimCliente.sql" />
     <Build Include="Schema\Tables\dbo\DimServicio.sql" />
     <Build Include="Schema\Tables\dbo\DimProducto.sql" />
+    <Build Include="Schema\Tables\dbo\FactVentaServicio.sql" />
+    <Build Include="Schema\Tables\dbo\FactVentaProducto.sql" />
     <Build Include="Schema\Tables\dbo\PackageConfig.sql" />
   </ItemGroup>
   <ItemGroup>
