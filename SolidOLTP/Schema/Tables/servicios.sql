@@ -1,10 +1,11 @@
-﻿CREATE TABLE [dbo].[servicios](
-	[id] [bigint] IDENTITY(1,1)			NOT NULL,
-	[codigo] [varchar](255)				NOT NULL,
-	[nombre_servicio] [varchar](255)	NOT NULL,
-	[precio] [numeric](38, 2)			NOT NULL,
-	[rowversion] [timestamp]			NOT NULL,
-PRIMARY KEY CLUSTERED 
+﻿CREATE TABLE [dbo].[servicios]
+(
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[codigo] [varchar](255) NOT NULL,
+	[nombre_servicio] [varchar](255) NOT NULL,
+	[precio] [numeric](38, 2) NOT NULL,
+	[rowversion] [timestamp] NOT NULL,
+	PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 ) WITH (

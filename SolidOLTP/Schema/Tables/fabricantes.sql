@@ -1,10 +1,11 @@
-﻿CREATE TABLE [dbo].[fabricantes](
-	[id] [bigint] IDENTITY(1,1)			NOT NULL,
-	[nombre_fabricante] [varchar](255)	NOT NULL,
-	[rowversion] [timestamp]			NOT NULL,
-PRIMARY KEY CLUSTERED 
+﻿CREATE TABLE [dbo].[fabricantes]
 (
-	[id] ASC
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[nombre_fabricante] [varchar](255) NOT NULL,
+	[rowversion] [timestamp] NOT NULL,
+	PRIMARY KEY CLUSTERED 
+(
+	[id] ASC 
 )WITH (
 	PAD_INDEX = OFF, 
 	STATISTICS_NORECOMPUTE = OFF, 

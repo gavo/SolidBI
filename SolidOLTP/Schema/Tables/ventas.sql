@@ -1,12 +1,13 @@
-﻿CREATE TABLE [dbo].[ventas](
-	[id] [bigint] IDENTITY(1,1)		NOT NULL,
-	[descuento] [numeric](38, 2)	NOT NULL,
-	[fecha] [datetime2](6)			NOT NULL,
-	[sub_total] [numeric](38, 2)	NOT NULL,
-	[total] [numeric](38, 2)		NOT NULL,
-	[id_cliente] [bigint]			NOT NULL,
-	[rowversion] [timestamp]		NOT NULL,
-PRIMARY KEY CLUSTERED 
+﻿CREATE TABLE [dbo].[ventas]
+(
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[descuento] [numeric](38, 2) NOT NULL,
+	[fecha] [datetime2](6) NOT NULL,
+	[sub_total] [numeric](38, 2) NOT NULL,
+	[total] [numeric](38, 2) NOT NULL,
+	[id_cliente] [bigint] NOT NULL,
+	[rowversion] [timestamp] NOT NULL,
+	PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 ) WITH (
@@ -20,9 +21,11 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ventas]  WITH CHECK ADD  CONSTRAINT [FKleerof1mym3gc1ah8hsarel3f] FOREIGN KEY([id_cliente])
+ALTER TABLE [dbo].[ventas]  WITH CHECK ADD  
+CONSTRAINT [FK_Clientes_Venta] FOREIGN KEY([id_cliente])
 REFERENCES [dbo].[clientes] ([id])
 GO
 
-ALTER TABLE [dbo].[ventas] CHECK CONSTRAINT [FKleerof1mym3gc1ah8hsarel3f]
+ALTER TABLE [dbo].[ventas] CHECK 
+CONSTRAINT [FK_Clientes_Venta]
 GO

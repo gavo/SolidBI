@@ -1,15 +1,16 @@
-﻿CREATE TABLE [dbo].[clientes](
-	[id] [bigint] IDENTITY(1,1)		NOT NULL,
-	[code] [varchar](255)			NOT NULL,
-	[documento] [varchar](255)		NOT NULL,
-	[email] [varchar](255)			NOT NULL,
+﻿CREATE TABLE [dbo].[clientes]
+(
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[code] [varchar](255) NOT NULL,
+	[documento] [varchar](255) NOT NULL,
+	[email] [varchar](255) NOT NULL,
 	[nombre_cliente] [varchar](255) NOT NULL,
 	[tipo_documento] [varchar](255) NOT NULL,
-	[id_grupo_clientes] [bigint]	NULL,
-	[rowversion] [timestamp]		NOT NULL,
-PRIMARY KEY CLUSTERED 
+	[id_grupo_clientes] [bigint] NULL,
+	[rowversion] [timestamp] NOT NULL,
+	PRIMARY KEY CLUSTERED 
 (
-	[id] ASC
+	[id] ASC 
 )WITH (
 	PAD_INDEX = OFF, 
 	STATISTICS_NORECOMPUTE = OFF, 
@@ -21,12 +22,15 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[clientes]  WITH CHECK ADD  CONSTRAINT [FKi9l4jekcr994wk9byusnoaxqq] FOREIGN KEY([id_grupo_clientes])
+ALTER TABLE [dbo].[clientes]  WITH CHECK ADD  
+CONSTRAINT [FK_Grupo_Clientes_Clientes] FOREIGN KEY([id_grupo_clientes])
 REFERENCES [dbo].[grupo_cliente] ([id])
 GO
 
-ALTER TABLE [dbo].[clientes] CHECK CONSTRAINT [FKi9l4jekcr994wk9byusnoaxqq]
+ALTER TABLE [dbo].[clientes] CHECK 
+CONSTRAINT [FK_Grupo_Clientes_Clientes]
 GO
 
-ALTER TABLE [dbo].[clientes]  WITH CHECK ADD CHECK  (([tipo_documento]='NIT' OR [tipo_documento]='CI'))
+ALTER TABLE [dbo].[clientes]  WITH CHECK 
+ADD CHECK  (([tipo_documento]='NIT' OR [tipo_documento]='CI'))
 GO

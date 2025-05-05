@@ -1,17 +1,18 @@
-﻿CREATE TABLE [dbo].[productos](
-	[id] [bigint] IDENTITY(1,1)					NOT NULL,
-	[cod_barra] [varchar](255)					NOT NULL,
-	[nombre_producto] [varchar](255)			NOT NULL,
+﻿CREATE TABLE [dbo].[productos]
+(
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[cod_barra] [varchar](255) NOT NULL,
+	[nombre_producto] [varchar](255) NOT NULL,
 	[nombre_producto_extranjero] [varchar](255) NOT NULL,
-	[peso] [int]								NOT NULL,
-	[precio] [numeric](38, 2)					NOT NULL,
-	[um] [varchar](255)							NOT NULL,
-	[id_producto] [bigint]						NULL,
-	[id_fabricante] [bigint]					NULL,
-	[id_grupo_producto] [bigint]				NULL,
-	[id_proveedor] [bigint]						NULL,
-	[rowversion] [timestamp]					NOT NULL,
-PRIMARY KEY CLUSTERED 
+	[peso] [int] NOT NULL,
+	[precio] [numeric](38, 2) NOT NULL,
+	[um] [varchar](255) NOT NULL,
+	[id_producto] [bigint] NULL,
+	[id_fabricante] [bigint] NULL,
+	[id_grupo_producto] [bigint] NULL,
+	[id_proveedor] [bigint] NULL,
+	[rowversion] [timestamp] NOT NULL,
+	PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (
@@ -24,30 +25,36 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [FK146wfsn2op2nvbfuxae33xbim] FOREIGN KEY([id_proveedor])
+ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
+CONSTRAINT [FK_Proveedor_Productos] FOREIGN KEY([id_proveedor])
 REFERENCES [dbo].[proveedores] ([id])
 GO
 
-ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK146wfsn2op2nvbfuxae33xbim]
+ALTER TABLE [dbo].[productos] CHECK
+CONSTRAINT [FK_Proveedor_Productos]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [FK8g21ywecj0h79w9on9ib35ex9] FOREIGN KEY([id_fabricante])
+ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
+CONSTRAINT [FK_Fabricante_Productos] FOREIGN KEY([id_fabricante])
 REFERENCES [dbo].[fabricantes] ([id])
 GO
 
-ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK8g21ywecj0h79w9on9ib35ex9]
+ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK_Fabricante_Productos]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [FKfewtsgs7kpy1dj32uw5xdw6da] FOREIGN KEY([id_producto])
+ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
+CONSTRAINT [FK_Producto_Producto] FOREIGN KEY([id_producto])
 REFERENCES [dbo].[productos] ([id])
 GO
 
-ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FKfewtsgs7kpy1dj32uw5xdw6da]
+ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK_Producto_Producto]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [FKmwe1n2tmekqy2tuowp11aoate] FOREIGN KEY([id_grupo_producto])
+ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
+CONSTRAINT [FK_Grupo_Producto_Productos] FOREIGN KEY([id_grupo_producto])
 REFERENCES [dbo].[grupos_productos] ([id])
 GO
 
-ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FKmwe1n2tmekqy2tuowp11aoate]
+ALTER TABLE [dbo].[productos] CHECK 
+CONSTRAINT [FK_Grupo_Producto_Productos]
 GO
