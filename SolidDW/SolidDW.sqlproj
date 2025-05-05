@@ -56,5 +56,24 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Schema" />
+    <Folder Include="Scripts" />
+    <Folder Include="Schema\Tables" />
+    <Folder Include="Schema\Tables\dbo" />
+    <Folder Include="Schema\Tables\staging" />
+    <Folder Include="Schema\Security" />
+    <Folder Include="Schema\Security\schemas" />
+    <Folder Include="Schema\Programmability" />
+    <Folder Include="Schema\Programmability\Stored Procedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema\Tables\dbo\DimDate.sql" />
+    <Build Include="Schema\Tables\dbo\DimCliente.sql" />
+    <Build Include="Schema\Tables\dbo\DimServicio.sql" />
+    <Build Include="Schema\Tables\dbo\DimProducto.sql" />
+    <Build Include="Schema\Tables\dbo\PackageConfig.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SolidDW.refactorlog" />
   </ItemGroup>
 </Project>
