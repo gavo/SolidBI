@@ -92,5 +92,9 @@
     <None Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
     <None Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
     <None Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
+    <None Include="Scripts\DimDate.data.sql" />
+    <None Include="Scripts\PackageConfig.data.sql" />
+    <None Include="Scripts\PatchDimDate.data.sql" />
+    <None Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
