@@ -5,7 +5,7 @@
     [des_Venta] NUMERIC(38, 2) NOT NULL,
     [FechaVentaKey] BIGINT NOT NULL,
     [sub_total] NUMERIC(38, 2) NOT NULL,
-    [total] NUMERIC(38, 2) NOT NULL,
+    [total_Venta] NUMERIC(38, 2) NOT NULL,
     [ClienteKey] BIGINT NOT NULL,
     [ServicioKey] BIGINT NOT NULL,
     [desc_Servicio] NUMERIC(38, 2) NOT NULL,
