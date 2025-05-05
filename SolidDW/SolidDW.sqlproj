@@ -67,6 +67,7 @@
     <Folder Include="Schema\Programmability\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="Schema\Security\schemas\staging.sql" />
     <Build Include="Schema\Tables\dbo\DimDate.sql" />
     <Build Include="Schema\Tables\dbo\DimCliente.sql" />
     <Build Include="Schema\Tables\dbo\DimServicio.sql" />
@@ -74,6 +75,11 @@
     <Build Include="Schema\Tables\dbo\FactVentaServicio.sql" />
     <Build Include="Schema\Tables\dbo\FactVentaProducto.sql" />
     <Build Include="Schema\Tables\dbo\PackageConfig.sql" />
+    <Build Include="Schema\Tables\staging\staging.cliente.sql" />
+    <Build Include="Schema\Tables\staging\stating.producto.sql" />
+    <Build Include="Schema\Tables\staging\staging.servicio.sql" />
+    <Build Include="Schema\Tables\staging\staging.ventaProducto.sql" />
+    <Build Include="Schema\Tables\staging\staging.ventaServicio.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SolidDW.refactorlog" />
