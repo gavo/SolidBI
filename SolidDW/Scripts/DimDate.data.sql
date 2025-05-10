@@ -11,7 +11,7 @@
 			SELECT TOP 1 
 				   @startdate = FullDate
 			FROM dbo.DimDate 
-			ORDER By DateKey ASC;
+			ORDER By DateSK ASC;
 		END
 
 	WHILE (@startdate <= @enddate)
@@ -22,7 +22,7 @@
 		SET @startdate = DATEADD(dd,1,@startdate);
 	END
 
-	 INSERT INTO dbo.DimDate(DateKey
+	 INSERT INTO dbo.DimDate(DateSK
 							,FullDate 
 							,DayNumberOfWeek 
 							,DayNameOfWeek 
@@ -35,14 +35,14 @@
 							,CalendarYear 
 							,CalendarSemester)
 
-	SELECT DateKey           = CONVERT(INT,CONVERT(VARCHAR,dl.FullDate,112))
+	SELECT DateSK           = CONVERT(INT,CONVERT(VARCHAR, dl.FullDate, 112))
 		  ,FullDate          = dl.FullDate
-		  ,DayNumberOfWeek   = DATEPART(dw,dl.FullDate)
-		  ,DayNameOfWeek     = DATENAME(WEEKDAY,dl.FullDate) 
-		  ,DayNumberOfMonth  = DATEPART(d,dl.FullDate)
-		  ,DayNumberOfYear   = DATEPART(dy,dl.FullDate)
+		  ,DayNumberOfWeek   = DATEPART(dw, dl.FullDate)
+		  ,DayNameOfWeek     = DATENAME(WEEKDAY, dl.FullDate) 
+		  ,DayNumberOfMonth  = DATEPART(d, dl.FullDate)
+		  ,DayNumberOfYear   = DATEPART(dy, dl.FullDate)
 		  ,WeekNumberOfYear  = DATEPART(wk, dl.FUllDate)
-		  ,[MonthName]       = DATENAME(MONTH,dl.FullDate) 
+		  ,[MonthName]       = DATENAME(MONTH, dl.FullDate) 
 		  ,MonthNumberOfYear = MONTH(dl.FullDate)
 		  ,CalendarQuarter   = DATEPART(qq, dl.FullDate)
 		  ,CalendarYear      = YEAR(dl.FullDate)
