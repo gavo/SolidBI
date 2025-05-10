@@ -9,7 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
-:r .\PackageConfig.data.sql	
-:r .\DimDate.data.sql	
+:r .\PackageConfig.data.sql
+:r .\DimDate.data.sql
 :r .\PatchDimDate.data.sql	

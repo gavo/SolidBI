@@ -80,21 +80,23 @@
     <Build Include="Schema\Tables\staging\staging.servicio.sql" />
     <Build Include="Schema\Tables\staging\staging.ventaProducto.sql" />
     <Build Include="Schema\Tables\staging\staging.ventaServicio.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\DW_MergeDimProducto.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\DW_MergeDimServicio.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaProducto.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaServicio.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimProducto.sql" />
+	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimServicio.sql" />
+	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaProducto.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaServicio.sql" />
+	<Build Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
+	<Build Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
+	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="SolidDW.refactorlog" />
+	  <RefactorLog Include="SolidDW.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
-    <None Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
-    <None Include="Scripts\DimDate.data.sql" />
-    <None Include="Scripts\PackageConfig.data.sql" />
-    <None Include="Scripts\PatchDimDate.data.sql" />
-    <None Include="Scripts\Script.PostDeployment.sql" />
+	<PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Scripts\PatchDimDate.data.sql" />
+	<None Include="Scripts\DimDate.data.sql" />
+	<None Include="Scripts\PackageConfig.data.sql" />
   </ItemGroup>
 </Project>
