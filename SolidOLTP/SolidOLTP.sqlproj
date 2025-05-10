@@ -77,5 +77,6 @@
     <Build Include="Schema\Programmability\GetDatabaseRowVersion.sql" />
     <Build Include="Schema\Programmability\GetClienteChangesByRowVersion.sql" />
     <Build Include="Schema\Programmability\GetProductoChangesByRowVersion.sql" />
+    <Build Include="Schema\Programmability\GetServicioChangesByRowVersion.sql" />
   </ItemGroup>
 </Project>
