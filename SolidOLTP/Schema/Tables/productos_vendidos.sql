@@ -21,8 +21,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[productos_vendidos]  WITH CHECK ADD  
-CONSTRAINT [FK_Productos_Vendidos_Venta] FOREIGN KEY([id_venta])
+ALTER TABLE [dbo].[productos_vendidos]
+ADD  CONSTRAINT [FK_Productos_Vendidos_Venta] FOREIGN KEY([id_venta])
 REFERENCES [dbo].[ventas] ([id])
 GO
 
@@ -30,8 +30,8 @@ ALTER TABLE [dbo].[productos_vendidos] CHECK
 CONSTRAINT [FK_Productos_Vendidos_Venta]
 GO
 
-ALTER TABLE [dbo].[productos_vendidos]  WITH CHECK ADD  
-CONSTRAINT [FK_Productos_Vendidos_Productos] FOREIGN KEY([id_producto])
+ALTER TABLE [dbo].[productos_vendidos]
+ADD CONSTRAINT [FK_Productos_Vendidos_Productos] FOREIGN KEY([id_producto])
 REFERENCES [dbo].[productos] ([id])
 GO
 

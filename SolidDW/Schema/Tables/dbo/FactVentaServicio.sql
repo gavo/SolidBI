@@ -10,7 +10,7 @@
     [ServicioKey] BIGINT NOT NULL,
     [desc_Servicio] NUMERIC(38, 2) NOT NULL,
     [precio_servicio] NUMERIC(38,2) NOT NULL,
-    [obvservaciones] VARCHAR(255) NULL,
+    [observaciones] VARCHAR(255) NULL,
     [FechaFacturaKey] BIGINT NOT NULL,
     [credito_fiscal] NUMERIC(38, 2) NULL,
 	[nit] VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@
 GO
 
 ALTER TABLE [dbo].[FactVentaServicio] 
-ADD CONSTRAINT PK_FactVentaServicios PRIMARY KEY(VentaId, ServicioId);
+ADD CONSTRAINT PK_FactVentaServicios PRIMARY KEY(VentaID, ServicioID);
 GO
 
 ALTER TABLE [dbo].[FactVentaServicio] 

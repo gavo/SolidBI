@@ -25,8 +25,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
-CONSTRAINT [FK_Proveedor_Productos] FOREIGN KEY([id_proveedor])
+ALTER TABLE [dbo].[productos]  
+ADD CONSTRAINT [FK_Proveedor_Productos] FOREIGN KEY([id_proveedor])
 REFERENCES [dbo].[proveedores] ([id])
 GO
 
@@ -34,24 +34,24 @@ ALTER TABLE [dbo].[productos] CHECK
 CONSTRAINT [FK_Proveedor_Productos]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
-CONSTRAINT [FK_Fabricante_Productos] FOREIGN KEY([id_fabricante])
+ALTER TABLE [dbo].[productos]
+ADD CONSTRAINT [FK_Fabricante_Productos] FOREIGN KEY([id_fabricante])
 REFERENCES [dbo].[fabricantes] ([id])
 GO
 
 ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK_Fabricante_Productos]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
-CONSTRAINT [FK_Producto_Producto] FOREIGN KEY([id_producto])
+ALTER TABLE [dbo].[productos]
+ADD CONSTRAINT [FK_Producto_Producto] FOREIGN KEY([id_producto])
 REFERENCES [dbo].[productos] ([id])
 GO
 
 ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK_Producto_Producto]
 GO
 
-ALTER TABLE [dbo].[productos]  WITH CHECK ADD 
-CONSTRAINT [FK_Grupo_Producto_Productos] FOREIGN KEY([id_grupo_producto])
+ALTER TABLE [dbo].[productos]
+ADD CONSTRAINT [FK_Grupo_Producto_Productos] FOREIGN KEY([id_grupo_producto])
 REFERENCES [dbo].[grupos_productos] ([id])
 GO
 

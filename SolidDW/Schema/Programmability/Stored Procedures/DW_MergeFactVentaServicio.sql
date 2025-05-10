@@ -11,7 +11,7 @@ BEGIN
 		ServicioKey = sc.ServicioKey,
 		desc_Servicio = sc.desc_Servicio,
 		precio_servicio = sc.precio_servicio,
-		obvservaciones = sc.observaciones,
+		observaciones = sc.observaciones,
 		credito_fiscal = sc.credito_fiscal,
 		FechaFacturaKey = sc.FechaFacturaKey,
 		nit = sc.nit,

@@ -22,8 +22,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[clientes]  WITH CHECK ADD  
-CONSTRAINT [FK_Grupo_Clientes_Clientes] FOREIGN KEY([id_grupo_clientes])
+ALTER TABLE [dbo].[clientes]
+ADD CONSTRAINT [FK_Grupo_Clientes_Clientes] FOREIGN KEY([id_grupo_clientes])
 REFERENCES [dbo].[grupo_cliente] ([id])
 GO
 
@@ -31,6 +31,6 @@ ALTER TABLE [dbo].[clientes] CHECK
 CONSTRAINT [FK_Grupo_Clientes_Clientes]
 GO
 
-ALTER TABLE [dbo].[clientes]  WITH CHECK 
+ALTER TABLE [dbo].[clientes]
 ADD CHECK  (([tipo_documento]='NIT' OR [tipo_documento]='CI'))
 GO

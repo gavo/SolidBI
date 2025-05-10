@@ -21,8 +21,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ventas]  WITH CHECK ADD  
-CONSTRAINT [FK_Clientes_Venta] FOREIGN KEY([id_cliente])
+ALTER TABLE [dbo].[ventas]
+ADD CONSTRAINT [FK_Clientes_Venta] FOREIGN KEY([id_cliente])
 REFERENCES [dbo].[clientes] ([id])
 GO
 

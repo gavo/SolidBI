@@ -21,8 +21,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[servicios_realizados]  WITH CHECK ADD  
-CONSTRAINT [FK_Servicios_Realizados_Servicio] FOREIGN KEY([id_servicio])
+ALTER TABLE [dbo].[servicios_realizados]
+ADD CONSTRAINT [FK_Servicios_Realizados_Servicio] FOREIGN KEY([id_servicio])
 REFERENCES [dbo].[servicios] ([id])
 GO
 
@@ -30,8 +30,8 @@ ALTER TABLE [dbo].[servicios_realizados] CHECK
 CONSTRAINT [FK_Servicios_Realizados_Servicio]
 GO
 
-ALTER TABLE [dbo].[servicios_realizados]  WITH CHECK ADD  
-CONSTRAINT [Servicios_Realizados_Venta] FOREIGN KEY([id_venta])
+ALTER TABLE [dbo].[servicios_realizados]
+ADD CONSTRAINT [Servicios_Realizados_Venta] FOREIGN KEY([id_venta])
 REFERENCES [dbo].[ventas] ([id])
 GO
 

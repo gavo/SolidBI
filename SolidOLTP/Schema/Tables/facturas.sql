@@ -23,8 +23,8 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[facturas]  WITH CHECK ADD 
-CONSTRAINT [FK_Ventas_Facturas] FOREIGN KEY([id_venta])
+ALTER TABLE [dbo].[facturas]  
+ADD CONSTRAINT [FK_Ventas_Facturas] FOREIGN KEY([id_venta])
 REFERENCES [dbo].[ventas] ([id])
 GO
 
