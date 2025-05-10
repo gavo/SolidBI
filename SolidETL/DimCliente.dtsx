@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimCliente"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{31E77BE9-18A2-408B-ACF3-1A2CDB18318B}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{8450617E-F14B-49A4-877E-AB497532AA87}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACoBjPBqH8grEpjBVwrZ7g6oXAyitiqqArvtdGavzsjjgAAAAAOgAAAAAIAACAAAAB0ttDZLDW6F9wvHkKIhOBGu1a/+WtLlwQL3irPTk2VDxAAAABHOREVt9sP7JMhlPHWVTaRQAAAAHALwpz+iVeyvxJzPJRT2bcALLZmLYE6xpR3NNjBP3kT1/2Ll4GfTp8QFS8fjYlyVe5Nn8P5FwadCZctT7c3JeY</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABmxzBXGspqLs/CQ/xynyhZFxgCYreU8FRy/IP8ImxMUQAAAAAOgAAAAAIAACAAAABWEa+iBjyUf1ftJhIEZcbRI5QMt8SeBjfs65Gj4uBOmRAAAAD0nNF4z2fCLm7G536SdENWQAAAADI5aCXDO+PcbsZqSfOgk4/BZGGZxlJlxFlFiFiEZOzt/DcLH4utkYtTyc8zmmuHL50p/5pfDZRp8G0J5UMWGmU</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABJWsrPtT+ybWaIOn0x1waciGeC/pZpCiW32aHJibSergAAAAAOgAAAAAIAACAAAAA2Kopj9F0OxRLgsO9mJMQp33+oyXlc5GXkS3bZXKyEChAAAAAlHt0r+TPv0+Ouc+5M3Q32QAAAAHDQzG8uezwQIGtVclVfJ/v4dz4fqCziXieSo3+hdYqMz7gYQ5BI2eGGVQCmI1OEKba3iMHpVV+3aqBHxDq5ZpA</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACSXZUI4lNrvDvyCM9nJE+lXSNjoBVBp5HLAdXLcehS7QAAAAAOgAAAAAIAACAAAAAYnhoAhUdk2ETDVmn/38b+q+3fbXtsAi8XhW6QduUf7RAAAABki8x2+5KhKunaL0c4CXzgQAAAAOURbDKASoKXidUgSjWnD0jPjqyhjaYkF2zbGfVe6jdcpWKZBP8tP8lKsEUeY482uGS/KXr6jeDvsLtoJWmrcFA</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1151,14 +1151,14 @@ where [refTable].[ClienteID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,25.9999995299185"
+              EndConnector="0,25.999999529918"
               Start="0,0"
-              End="0,18.4999995299185">
+              End="0,18.499999529918">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.4999995299185" />
+                    End="0,18.499999529918" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
