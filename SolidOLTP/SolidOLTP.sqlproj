@@ -59,6 +59,7 @@
     <Folder Include="Schema" />
     <Folder Include="Scripts" />
     <Folder Include="Schema\Tables" />
+    <Folder Include="Schema\Programmability" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\Tables\almacenes.sql" />
@@ -73,5 +74,7 @@
     <Build Include="Schema\Tables\servicios.sql" />
     <Build Include="Schema\Tables\servicios_realizados.sql" />
     <Build Include="Schema\Tables\ventas.sql" />
+    <Build Include="Schema\Programmability\GetDatabaseRowVersion.sql" />
+    <Build Include="Schema\Programmability\GetClienteChangesByRowVersion.sql" />
   </ItemGroup>
 </Project>
