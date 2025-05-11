@@ -11,4 +11,6 @@ Post-Deployment Script Template
 */
 :r .\PackageConfig.data.sql
 :r .\DimDate.data.sql
+:r .\PatchProductoDim.data.sql
+:r .\PatchServicioDim.data.sql
 :r .\PatchDimDate.data.sql	
