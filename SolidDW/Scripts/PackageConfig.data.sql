@@ -21,15 +21,8 @@ IF NOT EXISTS(SELECT TOP(1) 1
 GO
 IF NOT EXISTS(SELECT TOP(1) 1
               FROM [dbo].[PackageConfig]
-			  WHERE [TableName] = 'VentaProducto')
+			  WHERE [TableName] = 'Ventas')
  BEGIN
-	INSERT [dbo].[PackageConfig] ([TableName], [LastRowVersion]) VALUES ('VentaProducto', 0)
- END
-GO
-IF NOT EXISTS(SELECT TOP(1) 1
-              FROM [dbo].[PackageConfig]
-			  WHERE [TableName] = 'VentaServicio')
- BEGIN
-	INSERT [dbo].[PackageConfig] ([TableName], [LastRowVersion]) VALUES ('VentaServicio', 0)
+	INSERT [dbo].[PackageConfig] ([TableName], [LastRowVersion]) VALUES ('Ventas', 0)
  END
 GO
