@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="50"
-  DTS:VersionGUID="{94F0A6D0-27C7-4AC2-A584-D923F7213F7E}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{7AEDEC2E-B59F-4CDF-B7B9-AEFD4AD1FCF2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2165,6 +2165,10 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
           Id="Package\Get Ventas RowVersion"
           TopLeft="157.916658038481,130.433332426316" />
         <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Load Ventas"
+          TopLeft="178.33332358963,282.533331368632" />
+        <NodeLayout
           Size="140,41.6"
           Id="Package\Sync Staging"
           TopLeft="175.694434844924,369.777775206389" />
@@ -2217,32 +2221,6 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="243.074990609164,411.377775206389">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32.066666154398"
-              Start="0,0"
-              End="0,24.566666154398">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.566666154398" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\Load Ventas"
-          TopLeft="178.33332358963,282.533331368632" />
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="250.119434810775,247.433331901994">
           <EdgeLayout.Curve>
@@ -2286,6 +2264,28 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="243.074990609164,411.377775206389">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.066666154398"
+              Start="0,0"
+              End="0,24.566666154398">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.566666154398" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2295,13 +2295,33 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="130.4,41.6"
-          Id="Package\Load Ventas\Get Ventas"
-          TopLeft="381.499994315207,15.499999769032" />
+          Size="148,41.6"
+          Id="Package\Load Ventas\Lookup Ventas"
+          TopLeft="368.333327844739,385.833327583969" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Load Ventas\Lookup Producto"
+          TopLeft="369.166661165655,297.499995566905" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Load Ventas\Load Staging"
+          TopLeft="193.999997109175,501.999992519617" />
         <NodeLayout
           Size="152.8,41.6"
           Id="Package\Load Ventas\Lookup Clientes"
           TopLeft="370.833327807486,107.499998398125" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Load Ventas\Lookup Servicio"
+          TopLeft="372.499994449318,204.166663624346" />
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Load Ventas\Load Ventas"
+          TopLeft="550.99999178946,511.999992370606" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Load Ventas\Get Ventas"
+          TopLeft="381.499994315207,15.499999769032" />
         <EdgeLayout
           Id="Package\Load Ventas.Paths[OLE DB Source Output]"
           TopLeft="446.966661061346,57.099999769032">
@@ -2324,134 +2344,6 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Load Ventas\Lookup Servicio"
-          TopLeft="372.499994449318,204.166663624346" />
-        <EdgeLayout
-          Id="Package\Load Ventas.Paths[Lookup Match Output]"
-          TopLeft="447.866661128402,149.099998398125">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,55.0666652262211"
-              Start="0,0"
-              End="0,47.5666652262211">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,47.5666652262211" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,17.9786451131105,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156.8,41.6"
-          Id="Package\Load Ventas\Lookup Producto"
-          TopLeft="369.166661165655,297.499995566905" />
-        <EdgeLayout
-          Id="Package\Load Ventas.Paths[Lookup Match Output1]"
-          TopLeft="448.033327807486,245.766663624346">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,51.7333319425583"
-              Start="0,0"
-              End="0,44.2333319425583">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.2333319425583" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,16.3119784712791,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="148,41.6"
-          Id="Package\Load Ventas\Lookup Ventas"
-          TopLeft="368.333327844739,385.833327583969" />
-        <EdgeLayout
-          Id="Package\Load Ventas.Paths[Lookup Match Output2]"
-          TopLeft="444.949994505197,339.099995566905">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,46.7333320170641"
-              Start="0,0"
-              End="0,39.2333320170641">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.2333320170641" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,13.811978508532,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="140,41.6"
-          Id="Package\Load Ventas\Load Staging"
-          TopLeft="193.999997109175,501.999992519617" />
-        <EdgeLayout
-          Id="Package\Load Ventas.Paths[Lookup Match Output3]"
-          TopLeft="418.999994511406,427.433327583969">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-154.999997402231,74.5666649356485"
-              Start="0,0"
-              End="-154.999997402231,67.0666649356485">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.3051686369481" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26.3051686369481"
-                    Point2="0,30.3051686369481"
-                    Point3="-4,30.3051686369481" />
-                  <mssgle:LineSegment
-                    End="-150.999997402231,30.3051686369481" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-150.999997402231,30.3051686369481"
-                    Point2="-154.999997402231,30.3051686369481"
-                    Point3="-154.999997402231,34.3051686369481" />
-                  <mssgle:LineSegment
-                    End="-154.999997402231,67.0666649356485" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-125.691385419866,35.3051686369481,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\Load Ventas\Load Ventas"
-          TopLeft="550.99999178946,511.999992370606" />
         <EdgeLayout
           Id="Package\Load Ventas.Paths[Lookup No Match Output]"
           TopLeft="465.666661178072,427.433327583969">
@@ -2488,57 +2380,134 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output3]"
+          TopLeft="418.999994511406,427.433327583969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-154.999997402231,74.5666649356485"
+              Start="0,0"
+              End="-154.999997402231,67.0666649356485">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3051686369481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3051686369481"
+                    Point2="0,30.3051686369481"
+                    Point3="-4,30.3051686369481" />
+                  <mssgle:LineSegment
+                    End="-150.999997402231,30.3051686369481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-150.999997402231,30.3051686369481"
+                    Point2="-154.999997402231,30.3051686369481"
+                    Point3="-154.999997402231,34.3051686369481" />
+                  <mssgle:LineSegment
+                    End="-154.999997402231,67.0666649356485" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-125.691385419866,35.3051686369481,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output2]"
+          TopLeft="444.949994505197,339.099995566905">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7333320170641"
+              Start="0,0"
+              End="0,39.2333320170641">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2333320170641" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,13.811978508532,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output1]"
+          TopLeft="448.033327807486,245.766663624346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.7333319425583"
+              Start="0,0"
+              End="0,44.2333319425583">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.2333319425583" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,16.3119784712791,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output]"
+          TopLeft="447.866661128402,149.099998398125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.0666652262211"
+              Start="0,0"
+              End="0,47.5666652262211">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5666652262211" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,17.9786451131105,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Ventas\Get Ventas">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Ventas\Lookup Clientes">
+    design-time-name="Package\Load Ventas\Lookup Ventas">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[DimCliente]</Value>
+          type="q3:string">[dbo].[FactVentas]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Ventas\Lookup Servicio">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimServicio]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2551,7 +2520,7 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2561,30 +2530,7 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Ventas\Lookup Ventas">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[FactVentas]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2605,6 +2551,52 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Clientes">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCliente]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Servicio">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimServicio]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Load Ventas\Load Ventas">
     <Properties>
       <Property>
@@ -2614,6 +2606,14 @@ where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[Ite
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Get Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
