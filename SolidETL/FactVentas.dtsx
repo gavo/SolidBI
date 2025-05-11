@@ -1,0 +1,2621 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/10/2025 10:07:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GAVO"
+  DTS:CreatorName="GAVO\gvmgu"
+  DTS:DTSID="{E8512ABF-2D9B-4448-AB3A-3B9D2E20256F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{94F0A6D0-27C7-4AC2-A584-D923F7213F7E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[source-solid]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3054E4A0-3D1E-4F90-A60F-4EDB155790D0}"
+      DTS:ObjectName="source-solid">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{3054E4A0-3D1E-4F90-A60F-4EDB155790D0}localhost.solid.sa;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[target-solid]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}"
+      DTS:ObjectName="target-solid">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}localhost.SolidDW.sa;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FBBD62E2-1522-44CA-AB63-8D09697DDDDA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dbts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{832E656D-F3EF-495C-B1C4-935B75F6A004}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRowValue">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean-up Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{68CA1F79-6C04-406F-99A9-005676964E93}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean-up Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [staging].[ventas];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Database RowVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FD4FC2D1-A68B-4FDA-9EF9-F15E0D1498F7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Database RowVersion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3054E4A0-3D1E-4F90-A60F-4EDB155790D0}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[GetDatabaseRowVersion] "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="DBTS"
+            SQLTask:DtsVariableName="User::dbts" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Ventas RowVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BA266D67-F01E-469D-BF8F-E1DB07400B4A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Ventas RowVersion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[GetLastPackageRowVersion] @tableName = 'Ventas'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastRowVersion"
+            SQLTask:DtsVariableName="User::LastRowValue" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Ventas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4A02E39E-5B33-46A1-96E4-3304730AD129}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Ventas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Ventas\Get Ventas"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Ventas"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetVentasChangesByRowVersion] @startRow = ?, @endRow = ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"@startRow:Input",{832E656D-F3EF-495C-B1C4-935B75F6A004};"@endRow:Input",{FBBD62E2-1522-44CA-AB63-8D09697DDDDA};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Get Ventas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[source-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[source-solid]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[VentaID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]"
+                      name="VentaID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[TipoItem]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]"
+                      name="TipoItem"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ItemID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]"
+                      name="ItemID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_Venta]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[desc_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_Venta]"
+                      name="desc_Venta"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItemString]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[TipoItemString]"
+                      length="8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItemString]"
+                      name="TipoItemString"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaVentaKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[FechaVentaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaVentaKey]"
+                      name="FechaVentaKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[sub_total]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[sub_total]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[sub_total]"
+                      name="sub_total"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Venta]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[total_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Venta]"
+                      name="total_Venta"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ClienteKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]"
+                      name="ClienteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ProductoKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]"
+                      name="ProductoKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ServicioKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]"
+                      name="ServicioKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[cant_item]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[cant_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[cant_item]"
+                      name="cant_item"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_item]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[desc_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_item]"
+                      name="desc_item"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[subtotal_item]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[subtotal_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[subtotal_item]"
+                      name="subtotal_item"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[precio_item]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[precio_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[precio_item]"
+                      name="precio_item"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[credito_fiscal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[credito_fiscal]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[credito_fiscal]"
+                      name="credito_fiscal"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaFacturaKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[FechaFacturaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaFacturaKey]"
+                      name="FechaFacturaKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[nit]"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nit]"
+                      name="nit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[nro]"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nro]"
+                      name="nro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[razon_social]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[razon_social]"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[razon_social]"
+                      name="razon_social"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Factura]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[total_Factura]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Factura]"
+                      name="total_Factura"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[VentaID]"
+                      dataType="i8"
+                      name="VentaID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[TipoItem]"
+                      dataType="i4"
+                      name="TipoItem" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ItemID]"
+                      dataType="i8"
+                      name="ItemID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[desc_Venta]"
+                      dataType="numeric"
+                      name="desc_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[TipoItemString]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="TipoItemString" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[FechaVentaKey]"
+                      dataType="i4"
+                      name="FechaVentaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[sub_total]"
+                      dataType="numeric"
+                      name="sub_total"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[total_Venta]"
+                      dataType="numeric"
+                      name="total_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ClienteKey]"
+                      dataType="i8"
+                      name="ClienteKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ProductoKey]"
+                      dataType="i8"
+                      name="ProductoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[ServicioKey]"
+                      dataType="i8"
+                      name="ServicioKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[cant_item]"
+                      dataType="i4"
+                      name="cant_item" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[desc_item]"
+                      dataType="numeric"
+                      name="desc_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[subtotal_item]"
+                      dataType="numeric"
+                      name="subtotal_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[precio_item]"
+                      dataType="numeric"
+                      name="precio_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[credito_fiscal]"
+                      dataType="numeric"
+                      name="credito_fiscal"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[FechaFacturaKey]"
+                      dataType="i4"
+                      name="FechaFacturaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[nit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nit" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[nro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nro" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[razon_social]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="razon_social" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[total_Factura]"
+                      dataType="numeric"
+                      name="total_Factura"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[VentaID]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[VentaID]"
+                      name="VentaID" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[TipoItem]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[TipoItem]"
+                      name="TipoItem" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ItemID]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ItemID]"
+                      name="ItemID" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[desc_Venta]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[desc_Venta]"
+                      name="desc_Venta"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[TipoItemString]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[TipoItemString]"
+                      name="TipoItemString" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[FechaVentaKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[FechaVentaKey]"
+                      name="FechaVentaKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[sub_total]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[sub_total]"
+                      name="sub_total"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[total_Venta]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[total_Venta]"
+                      name="total_Venta"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ClienteKey]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ClienteKey]"
+                      name="ClienteKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ProductoKey]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ProductoKey]"
+                      name="ProductoKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ServicioKey]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ServicioKey]"
+                      name="ServicioKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[cant_item]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[cant_item]"
+                      name="cant_item" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[desc_item]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[desc_item]"
+                      name="desc_item"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[subtotal_item]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[subtotal_item]"
+                      name="subtotal_item"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[precio_item]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[precio_item]"
+                      name="precio_item"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[credito_fiscal]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[credito_fiscal]"
+                      name="credito_fiscal"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[FechaFacturaKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[FechaFacturaKey]"
+                      name="FechaFacturaKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[nit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[nit]"
+                      name="nit" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[nro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[nro]"
+                      name="nro" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[razon_social]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[razon_social]"
+                      name="razon_social" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[total_Factura]"
+                      dataType="numeric"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[total_Factura]"
+                      name="total_Factura"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Load Staging"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load Staging"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[ventas]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Load Staging.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[VentaID]"
+                      cachedDataType="i8"
+                      cachedName="VentaID"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[VentaID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[TipoItem]"
+                      cachedDataType="i4"
+                      cachedName="TipoItem"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[TipoItem]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[ItemID]"
+                      cachedDataType="i8"
+                      cachedName="ItemID"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ItemID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[desc_Venta]"
+                      cachedDataType="numeric"
+                      cachedName="desc_Venta"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[desc_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_Venta]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[TipoItemString]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="TipoItemString"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[TipoItemString]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItemString]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[FechaVentaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaVentaKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[FechaVentaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaVentaKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[sub_total]"
+                      cachedDataType="numeric"
+                      cachedName="sub_total"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[sub_total]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[sub_total]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[total_Venta]"
+                      cachedDataType="numeric"
+                      cachedName="total_Venta"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[total_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Venta]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[ClienteKey]"
+                      cachedDataType="i8"
+                      cachedName="ClienteKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[ProductoKey]"
+                      cachedDataType="i8"
+                      cachedName="ProductoKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ProductoKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[ServicioKey]"
+                      cachedDataType="i8"
+                      cachedName="ServicioKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[cant_item]"
+                      cachedDataType="i4"
+                      cachedName="cant_item"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[cant_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[cant_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[desc_item]"
+                      cachedDataType="numeric"
+                      cachedName="desc_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[desc_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[subtotal_item]"
+                      cachedDataType="numeric"
+                      cachedName="subtotal_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[subtotal_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[subtotal_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[precio_item]"
+                      cachedDataType="numeric"
+                      cachedName="precio_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[precio_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[precio_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[credito_fiscal]"
+                      cachedDataType="numeric"
+                      cachedName="credito_fiscal"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[credito_fiscal]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[credito_fiscal]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[FechaFacturaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaFacturaKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[FechaFacturaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaFacturaKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[nit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="nit"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[nit]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nit]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[nro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="nro"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[nro]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nro]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[razon_social]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="razon_social"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[razon_social]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[razon_social]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].Columns[total_Factura]"
+                      cachedDataType="numeric"
+                      cachedName="total_Factura"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[total_Factura]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Factura]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[VentaID]"
+                      dataType="i8"
+                      name="VentaID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[TipoItem]"
+                      dataType="i4"
+                      name="TipoItem" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ItemID]"
+                      dataType="i8"
+                      name="ItemID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[TipoItemString]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TipoItemString" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[desc_Venta]"
+                      dataType="numeric"
+                      name="desc_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[FechaVentaKey]"
+                      dataType="i8"
+                      name="FechaVentaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[sub_total]"
+                      dataType="numeric"
+                      name="sub_total"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[total_Venta]"
+                      dataType="numeric"
+                      name="total_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      dataType="i8"
+                      name="ClienteKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ProductoKey]"
+                      dataType="i8"
+                      name="ProductoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      dataType="i8"
+                      name="ServicioKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[cant_item]"
+                      dataType="i4"
+                      name="cant_item" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[desc_item]"
+                      dataType="numeric"
+                      name="desc_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[precio_item]"
+                      dataType="numeric"
+                      name="precio_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[subtotal_item]"
+                      dataType="numeric"
+                      name="subtotal_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[credito_fiscal]"
+                      dataType="numeric"
+                      name="credito_fiscal"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[FechaFacturaKey]"
+                      dataType="i8"
+                      name="FechaFacturaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[nit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nit" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[nro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nro" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[razon_social]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="razon_social" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input].ExternalColumns[total_Factura]"
+                      dataType="numeric"
+                      name="total_Factura"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Load Staging.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Load Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Load Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Load Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Load Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Load Ventas"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load Ventas"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactVentas]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Load Ventas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[VentaID]"
+                      cachedDataType="i8"
+                      cachedName="VentaID"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[VentaID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[TipoItem]"
+                      cachedDataType="i4"
+                      cachedName="TipoItem"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[TipoItem]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[ItemID]"
+                      cachedDataType="i8"
+                      cachedName="ItemID"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ItemID]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[desc_Venta]"
+                      cachedDataType="numeric"
+                      cachedName="desc_Venta"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[desc_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_Venta]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[TipoItemString]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="TipoItemString"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[TipoItemString]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItemString]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[FechaVentaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaVentaKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[FechaVentaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaVentaKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[sub_total]"
+                      cachedDataType="numeric"
+                      cachedName="sub_total"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[sub_total]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[sub_total]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[total_Venta]"
+                      cachedDataType="numeric"
+                      cachedName="total_Venta"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[total_Venta]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Venta]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[ClienteKey]"
+                      cachedDataType="i8"
+                      cachedName="ClienteKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[ProductoKey]"
+                      cachedDataType="i8"
+                      cachedName="ProductoKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ProductoKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[ServicioKey]"
+                      cachedDataType="i8"
+                      cachedName="ServicioKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[cant_item]"
+                      cachedDataType="i4"
+                      cachedName="cant_item"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[cant_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[cant_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[desc_item]"
+                      cachedDataType="numeric"
+                      cachedName="desc_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[desc_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[desc_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[subtotal_item]"
+                      cachedDataType="numeric"
+                      cachedName="subtotal_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[subtotal_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[subtotal_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[precio_item]"
+                      cachedDataType="numeric"
+                      cachedName="precio_item"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[precio_item]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[precio_item]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[credito_fiscal]"
+                      cachedDataType="numeric"
+                      cachedName="credito_fiscal"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[credito_fiscal]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[credito_fiscal]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[FechaFacturaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaFacturaKey"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[FechaFacturaKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[FechaFacturaKey]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[nit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="nit"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[nit]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nit]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[nro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="nro"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[nro]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[nro]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[razon_social]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="razon_social"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[razon_social]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[razon_social]" />
+                    <inputColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].Columns[total_Factura]"
+                      cachedDataType="numeric"
+                      cachedName="total_Factura"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[total_Factura]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[total_Factura]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[VentaID]"
+                      dataType="i8"
+                      name="VentaID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[TipoItem]"
+                      dataType="i4"
+                      name="TipoItem" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ItemID]"
+                      dataType="i8"
+                      name="ItemID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[TipoItemString]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TipoItemString" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[desc_Venta]"
+                      dataType="numeric"
+                      name="desc_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[FechaVentaKey]"
+                      dataType="i8"
+                      name="FechaVentaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[sub_total]"
+                      dataType="numeric"
+                      name="sub_total"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[total_Venta]"
+                      dataType="numeric"
+                      name="total_Venta"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      dataType="i8"
+                      name="ClienteKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ProductoKey]"
+                      dataType="i8"
+                      name="ProductoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      dataType="i8"
+                      name="ServicioKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[cant_item]"
+                      dataType="i4"
+                      name="cant_item" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[desc_item]"
+                      dataType="numeric"
+                      name="desc_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[precio_item]"
+                      dataType="numeric"
+                      name="precio_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[subtotal_item]"
+                      dataType="numeric"
+                      name="subtotal_item"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[credito_fiscal]"
+                      dataType="numeric"
+                      name="credito_fiscal"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[FechaFacturaKey]"
+                      dataType="i8"
+                      name="FechaFacturaKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[nit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nit" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[nro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nro" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[razon_social]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="razon_social" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input].ExternalColumns[total_Factura]"
+                      dataType="numeric"
+                      name="total_Factura"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Load Ventas.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Load Ventas.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Load Ventas.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Load Ventas.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Load Ventas.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Lookup Clientes"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Clientes"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCliente]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCliente]) [refTable]
+where [refTable].[ClienteID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ClienteSK" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ClienteID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="code" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="documento" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="email" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_cliente" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="tipo_documento" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="descuento_grupo_cliente" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="nombre_grupo_cliente" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Lookup Clientes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input].Columns[ClienteKey]"
+                      cachedDataType="i8"
+                      cachedName="ClienteKey"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ClienteKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ClienteID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Match Output].Columns[ClienteSK]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Match Output].Columns[ClienteSK]"
+                      name="ClienteSK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ClienteSK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Lookup Producto"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Producto"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProducto]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProducto]) [refTable]
+where [refTable].[ProductoID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductoSK" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductoID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="cod_barra" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_producto" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_producto_extranjero" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="peso" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="precio" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="um" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="id_producto" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre_fabricante" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_grupo_producto" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_proveedor" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Lookup Producto.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input].Columns[ProductoSK]"
+                      cachedDataType="i8"
+                      cachedName="ProductoKey"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ProductoKey]"
+                      name="ProductoSK"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductoID</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductoSK</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Producto.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Lookup Servicio"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Servicio"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimServicio]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimServicio]) [refTable]
+where [refTable].[ServicioID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ServicioSK" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ServicioID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="codigo" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_servicio" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="precio" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Lookup Servicio.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input].Columns[ServicioSK]"
+                      cachedDataType="i8"
+                      cachedName="ServicioKey"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ServicioKey]"
+                      name="ServicioSK"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ServicioID</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ServicioSK</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ventas\Lookup Ventas"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Ventas"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[FactVentas]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[FactVentas]) [refTable]
+where [refTable].[VentaID] = ? and [refTable].[TipoItem] = ? and [refTable].[ItemID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="VentaID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TipoItem" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ItemID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TipoItemString" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="desc_Venta" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="FechaVentaKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="sub_total" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="total_Venta" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="ClienteKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductoKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ServicioKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="cant_item" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="desc_item" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="precio_item" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="subtotal_item" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="credito_fiscal" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;referenceColumn name="FechaFacturaKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nit" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nro" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="razon_social" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="total_Factura" dataType="DT_NUMERIC" length="0" precision="38" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]};#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]};#{Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ventas\Lookup Ventas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[target-solid]"
+                  connectionManagerRefId="Package.ConnectionManagers[target-solid]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input].Columns[VentaID]"
+                      cachedDataType="i8"
+                      cachedName="VentaID"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VentaID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">VentaID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input].Columns[TipoItem]"
+                      cachedDataType="i4"
+                      cachedName="TipoItem"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[TipoItem]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TipoItem</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input].Columns[ItemID]"
+                      cachedDataType="i8"
+                      cachedName="ItemID"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[ItemID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ItemID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Ventas.Paths[Lookup Match Output]"
+              endId="Package\Load Ventas\Lookup Servicio.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Ventas\Lookup Clientes.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ventas.Paths[Lookup Match Output1]"
+              endId="Package\Load Ventas\Lookup Producto.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Ventas\Lookup Servicio.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ventas.Paths[Lookup Match Output2]"
+              endId="Package\Load Ventas\Lookup Ventas.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Ventas\Lookup Producto.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ventas.Paths[Lookup Match Output3]"
+              endId="Package\Load Ventas\Load Staging.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ventas.Paths[Lookup No Match Output]"
+              endId="Package\Load Ventas\Load Ventas.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Ventas\Lookup Ventas.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Ventas.Paths[OLE DB Source Output]"
+              endId="Package\Load Ventas\Lookup Clientes.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sync Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D963B016-87AE-4B07-B2D3-FC1DAFA685E7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sync Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[DW_MergeFactVentas] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Config"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{715DD400-8F1E-4B2B-A16E-C10E8CF07708}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Config"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FF1C0B9-5BFD-44BA-99F8-635FC19E7DA9}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[UpdateLastPackageRowVersion] @tableName = 'Ventas', @lastRowVersion = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::dbts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2CEC5D0B-5B79-4745-9C06-D480B1090DFF}"
+      DTS:From="Package\Get Database RowVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Ventas RowVersion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{4159433A-435E-4785-B89E-7936FA20AC6E}"
+      DTS:From="Package\Get Ventas RowVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Clean-up Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3BF19533-6EBF-4E6F-9197-3617970B4489}"
+      DTS:From="Package\Clean-up Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Ventas" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{CB24AFA8-B3FA-4CD5-8107-AA28B9FF0FB2}"
+      DTS:From="Package\Load Ventas"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Sync Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{86D98A23-B7AB-43D3-89E7-A486BAF7F655}"
+      DTS:From="Package\Sync Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Update Config" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Clean-up Staging"
+          TopLeft="174.30554603192,205.833331901994" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\Get Database RowVersion"
+          TopLeft="144.583325433649,52.8666662990385" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Get Ventas RowVersion"
+          TopLeft="157.916658038481,130.433332426316" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Sync Staging"
+          TopLeft="175.694434844924,369.777775206389" />
+        <NodeLayout
+          Size="144.8,41.6"
+          Id="Package\Update Config"
+          TopLeft="168.055546373405,443.444441360787" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="248.849991736065,94.4666662990385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.9666661272778"
+              Start="0,0"
+              End="0,28.4666661272778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.4666661272778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="252.9111020352,172.033332426316">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.7999994756778"
+              Start="0,0"
+              End="0,26.2999994756778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.2999994756778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="243.074990609164,411.377775206389">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.066666154398"
+              Start="0,0"
+              End="0,24.566666154398">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.566666154398" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Load Ventas"
+          TopLeft="178.33332358963,282.533331368632" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="250.119434810775,247.433331901994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.099999466638"
+              Start="0,0"
+              End="0,27.599999466638">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.599999466638" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="246.213879217277,324.133331368632">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.644443837757"
+              Start="0,0"
+              End="0,38.144443837757">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.144443837757" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Ventas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Load Ventas\Get Ventas"
+          TopLeft="381.499994315207,15.499999769032" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Load Ventas\Lookup Clientes"
+          TopLeft="370.833327807486,107.499998398125" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[OLE DB Source Output]"
+          TopLeft="446.966661061346,57.099999769032">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.3999986290932"
+              Start="0,0"
+              End="0,42.8999986290932">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8999986290932" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Load Ventas\Lookup Servicio"
+          TopLeft="372.499994449318,204.166663624346" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output]"
+          TopLeft="447.866661128402,149.099998398125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.0666652262211"
+              Start="0,0"
+              End="0,47.5666652262211">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5666652262211" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,17.9786451131105,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Load Ventas\Lookup Producto"
+          TopLeft="369.166661165655,297.499995566905" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output1]"
+          TopLeft="448.033327807486,245.766663624346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.7333319425583"
+              Start="0,0"
+              End="0,44.2333319425583">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.2333319425583" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,16.3119784712791,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\Load Ventas\Lookup Ventas"
+          TopLeft="368.333327844739,385.833327583969" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output2]"
+          TopLeft="444.949994505197,339.099995566905">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7333320170641"
+              Start="0,0"
+              End="0,39.2333320170641">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2333320170641" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,13.811978508532,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Load Ventas\Load Staging"
+          TopLeft="193.999997109175,501.999992519617" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup Match Output3]"
+          TopLeft="418.999994511406,427.433327583969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-154.999997402231,74.5666649356485"
+              Start="0,0"
+              End="-154.999997402231,67.0666649356485">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3051686369481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3051686369481"
+                    Point2="0,30.3051686369481"
+                    Point3="-4,30.3051686369481" />
+                  <mssgle:LineSegment
+                    End="-150.999997402231,30.3051686369481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-150.999997402231,30.3051686369481"
+                    Point2="-154.999997402231,30.3051686369481"
+                    Point3="-154.999997402231,34.3051686369481" />
+                  <mssgle:LineSegment
+                    End="-154.999997402231,67.0666649356485" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-125.691385419866,35.3051686369481,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Load Ventas\Load Ventas"
+          TopLeft="550.99999178946,511.999992370606" />
+        <EdgeLayout
+          Id="Package\Load Ventas.Paths[Lookup No Match Output]"
+          TopLeft="465.666661178072,427.433327583969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153.733330611388,84.566664786637"
+              Start="0,0"
+              End="153.733330611388,77.066664786637">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3693396993819" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.3693396993819"
+                    Point2="0,34.3693396993819"
+                    Point3="4,34.3693396993819" />
+                  <mssgle:LineSegment
+                    End="149.733330611388,34.3693396993819" />
+                  <mssgle:CubicBezierSegment
+                    Point1="149.733330611388,34.3693396993819"
+                    Point2="153.733330611388,34.3693396993819"
+                    Point3="153.733330611388,38.3693396993819" />
+                  <mssgle:LineSegment
+                    End="153.733330611388,77.066664786637" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="21.0602785869439,39.3693396993819,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Get Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Clientes">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCliente]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Servicio">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimServicio]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Producto">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProducto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Lookup Ventas">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[FactVentas]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Load Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Ventas\Load Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
