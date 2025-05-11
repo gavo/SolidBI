@@ -3,7 +3,7 @@
 BEGIN
 	SELECT
 		v.id AS VentaID,
-		0 AS TipoItem,
+		CAST(0 AS INT) AS TipoItem,
 		pv.id AS ItemID,
 		v.descuento AS desc_Venta,
 		'PRODUCTO' AS TipoItemString,
@@ -12,7 +12,7 @@ BEGIN
 		v.total AS total_Venta,
 		v.id_cliente AS ClienteKey,
 		pv.id_producto AS ProductoKey,
-		null AS ServicioKey,
+		CAST(0 AS BIGINT) AS ServicioKey,
 		pv.cantidad AS cant_item,
 		pv.descuento AS desc_item,
 		(pv.cantidad * pv.precio) AS subtotal_item,
@@ -32,7 +32,7 @@ BEGIN
 	UNION ALL
 	SELECT
 		v.id AS VentaID,
-		1 AS TipoItem,
+		CAST(1 AS INT) AS TipoItem,
 		sr.id AS ItemID,
 		v.descuento AS desc_Venta,
 		'SERVICIO' AS TipoItemString,
@@ -40,9 +40,9 @@ BEGIN
 		v.sub_total,
 		v.total AS total_Venta,
 		v.id_cliente AS ClienteKey,
-		null AS ProductoKey,
+		CAST(0 AS BIGINT) AS ProductoKey,
 		sr.id_servicio AS ServicioKey,
-		1 AS cant_item,
+		CAST(1 AS INT) AS cant_item,
 		sr.descuento AS desc_item,
 		sr.precio AS precio_item,
 		sr.precio AS subtotal_item,
