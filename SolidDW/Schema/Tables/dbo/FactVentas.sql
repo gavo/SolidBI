@@ -4,7 +4,7 @@
     [TipoItem] INT NOT NULL,
     [ItemID] BIGINT NOT NULL,
     [TipoItemString] VARCHAR(10),
-    [des_Venta] NUMERIC(38, 2) NOT NULL,
+    [desc_Venta] NUMERIC(38, 2) NOT NULL,
     [FechaVentaKey] BIGINT NOT NULL,
     [sub_total] NUMERIC(38, 2) NOT NULL,
     [total_Venta] NUMERIC(38, 2) NOT NULL,
