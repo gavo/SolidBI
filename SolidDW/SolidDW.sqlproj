@@ -72,31 +72,28 @@
     <Build Include="Schema\Tables\dbo\DimCliente.sql" />
     <Build Include="Schema\Tables\dbo\DimServicio.sql" />
     <Build Include="Schema\Tables\dbo\DimProducto.sql" />
-    <Build Include="Schema\Tables\dbo\FactVentaServicio.sql" />
-    <Build Include="Schema\Tables\dbo\FactVentaProducto.sql" />
+    <Build Include="Schema\Tables\dbo\FactVentas.sql" />
     <Build Include="Schema\Tables\dbo\PackageConfig.sql" />
     <Build Include="Schema\Tables\staging\staging.cliente.sql" />
     <Build Include="Schema\Tables\staging\stating.producto.sql" />
     <Build Include="Schema\Tables\staging\staging.servicio.sql" />
-    <Build Include="Schema\Tables\staging\staging.ventaProducto.sql" />
-    <Build Include="Schema\Tables\staging\staging.ventaServicio.sql" />
+    <Build Include="Schema\Tables\staging\staging.ventas.sql" />
     <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimProducto.sql" />
-	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimServicio.sql" />
-	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaProducto.sql" />
-    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentaServicio.sql" />
-	<Build Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
-	<Build Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
-	<Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimServicio.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactVentas.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
   </ItemGroup>
   <ItemGroup>
-	  <RefactorLog Include="SolidDW.refactorlog" />
+    <RefactorLog Include="SolidDW.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-	<PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-	<None Include="Scripts\PatchDimDate.data.sql" />
-	<None Include="Scripts\DimDate.data.sql" />
-	<None Include="Scripts\PackageConfig.data.sql" />
+    <None Include="Scripts\PatchDimDate.data.sql" />
+    <None Include="Scripts\DimDate.data.sql" />
+    <None Include="Scripts\PackageConfig.data.sql" />
   </ItemGroup>
 </Project>
