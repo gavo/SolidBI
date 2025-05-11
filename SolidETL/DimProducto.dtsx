@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimProducto"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{E938164A-24E2-4E8F-9D67-2BAEF604DC9B}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{E750B498-2AA7-499A-AB6B-194AB419710E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,12 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Persist Security Info=True;Initial File Name=;Server SPN=;Authentication=;Access Token=;Application Name=SSIS-DimProducto-{FA090FB0-D4FC-412D-9134-C0C3066E8B82}localhost.solid.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADEgZN8wtCwMXAgpiGgQPsJxKE34YTLCFlkJEEtM/HUiQAAAAAOgAAAAAIAACAAAADaCiG+ggFpR6EV88Adw897sg/JLuOIZRcKiSVCAOmhwBAAAAAfv2DBX4NXOTrpU0xksCc7QAAAAHIGiIsfrdJwTcTXqjOxujYUcjBQ3MxxVs+ZJI2MlZfQVHmwRxAhhgUkf7radSM8DjvGASbSmhpmhrXEW+juSlw</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimProducto-{FA090FB0-D4FC-412D-9134-C0C3066E8B82}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -42,12 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Persist Security Info=True;Application Name=SSIS-DimProducto-{C279B662-2848-48F5-929B-91DD11352C2B}localhost.SolidDW.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAdf/xajPx8XbtOtrbAuXiprUw0h1c3KLgmRTb6Em67wAAAAAAOgAAAAAIAACAAAACVGCmfelF8jfADQZr45gn1HUCamR9Cmk7dUf1W/fRGjxAAAAAQrixDD9BA1D1Vm6knrxNAQAAAAJ1QkeVeOpRBSAfBreTrNWHXe8e0Gn+tlg4ehMcHWwSiOpJO/ha0gP2X/gnVYVo5iazRCsHS6d2MSAvbRNyrEww</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimProducto-{C279B662-2848-48F5-929B-91DD11352C2B}localhost.SolidDW.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -1250,6 +1240,10 @@ where [refTable].[ProductoID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Clean-up Staging"
+          TopLeft="477.499973910551,267.799998137752" />
+        <NodeLayout
           Size="201.6,41.6"
           Id="Package\Get Database RowVersion"
           TopLeft="453.333308564293,117.866665847037" />
@@ -1257,6 +1251,18 @@ where [refTable].[ProductoID] = ?</property>
           Size="183.2,41.6"
           Id="Package\Get Table RowVersion"
           TopLeft="467.499974456927,194.133331983354" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Load Products"
+          TopLeft="482.499973637363,339.73333097087" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Sync Staging"
+          TopLeft="484.166640212967,422.066663731668" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Update Config"
+          TopLeft="468.333307744729,495.733329886066" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="556.61664151061,159.466665847037">
@@ -1279,10 +1285,6 @@ where [refTable].[ProductoID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Clean-up Staging"
-          TopLeft="477.499973910551,267.799998137752" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="557.899974183739,235.733331983354">
@@ -1305,10 +1307,6 @@ where [refTable].[ProductoID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="145.6,41.6"
-          Id="Package\Load Products"
-          TopLeft="482.499973637363,339.73333097087" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="555.999973773957,309.399998137752">
@@ -1331,10 +1329,6 @@ where [refTable].[ProductoID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="140,41.6"
-          Id="Package\Sync Staging"
-          TopLeft="484.166640212967,422.066663731668" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="554.733306925165,381.33333097087">
@@ -1357,10 +1351,6 @@ where [refTable].[ProductoID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Update Config"
-          TopLeft="468.333307744729,495.733329886066" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="552.449973978848,463.666663731668">
@@ -1505,37 +1495,6 @@ where [refTable].[ProductoID] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Products\Get Product Data">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Products\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimProducto]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Load Products\Load Staging">
     <Properties>
       <Property>
@@ -1545,6 +1504,37 @@ where [refTable].[ProductoID] = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Products\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProducto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Products\Get Product Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

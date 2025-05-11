@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimCliente"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{8450617E-F14B-49A4-877E-AB497532AA87}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{A0F856AA-68C8-46B2-8F75-BB34F66F9D87}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,12 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Persist Security Info=True;Initial File Name=;Server SPN=;Authentication=;Access Token=;Application Name=SSIS-DimCliente-{5405B054-DBCE-41A9-9AE4-4FEAC24D2692}localhost.solid.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABmxzBXGspqLs/CQ/xynyhZFxgCYreU8FRy/IP8ImxMUQAAAAAOgAAAAAIAACAAAABWEa+iBjyUf1ftJhIEZcbRI5QMt8SeBjfs65Gj4uBOmRAAAAD0nNF4z2fCLm7G536SdENWQAAAADI5aCXDO+PcbsZqSfOgk4/BZGGZxlJlxFlFiFiEZOzt/DcLH4utkYtTyc8zmmuHL50p/5pfDZRp8G0J5UMWGmU</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimCliente-{5405B054-DBCE-41A9-9AE4-4FEAC24D2692}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -42,12 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Persist Security Info=True;Application Name=SSIS-DimCliente-{1A6241F3-DF03-4015-BF5E-BA6C528C9D92}localhost.SolidDW.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACSXZUI4lNrvDvyCM9nJE+lXSNjoBVBp5HLAdXLcehS7QAAAAAOgAAAAAIAACAAAAAYnhoAhUdk2ETDVmn/38b+q+3fbXtsAi8XhW6QduUf7RAAAABki8x2+5KhKunaL0c4CXzgQAAAAOURbDKASoKXidUgSjWnD0jPjqyhjaYkF2zbGfVe6jdcpWKZBP8tP8lKsEUeY482uGS/KXr6jeDvsLtoJWmrcFA</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimCliente-{1A6241F3-DF03-4015-BF5E-BA6C528C9D92}localhost.SolidDW.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -73,13 +63,13 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\Clean-up Staging"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{DEB9E8ED-39E9-4451-88C3-EF901BF8D685}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="Clean-up Staging"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -1083,12 +1073,12 @@ where [refTable].[ClienteID] = ?</property>
       DTS:From="Package\Get LastRowVersion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Execute SQL Task" />
+      DTS:To="Package\Clean-up Staging" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{E8C88620-6E8B-44AA-935B-09A51D777829}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\Clean-up Staging"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
       DTS:To="Package\Load Clientes" />
@@ -1122,8 +1112,8 @@ where [refTable].[ClienteID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Execute SQL Task"
+          Size="158.4,41.6"
+          Id="Package\Clean-up Staging"
           TopLeft="349.999980876844,264.333331495192" />
         <NodeLayout
           Size="171.2,41.6"

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{FAF68AB2-58DD-4E98-BEBB-5E92830087DE}">
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{9AA81F45-AA7C-4920-B43D-E575A353E720}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,12 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Persist Security Info=True;Initial File Name=;Server SPN=;Authentication=;Access Token=;Application Name=SSIS-Package1-{E188E27D-9DD3-4DDD-9587-B43C7905844D}localhost.solid.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACHCglnUm2d1HY7ML1jEacfDZM2Mv9StgkF24fEKTGnagAAAAAOgAAAAAIAACAAAAD7QqqYzm1CmjX663kUGkWjRstP41PzI631iNrUiArrnhAAAADXvKRIzgYbtmR+Srru7aDzQAAAANeRuX7VYFN3yo5k+89tUIzbf/VE66e78wBAeuC4CffLm/RIAnBtGXXj83Vo0nrRUk4ne+bgz/kUL/WmW/1jRGw</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{E188E27D-9DD3-4DDD-9587-B43C7905844D}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -42,12 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Persist Security Info=True;Application Name=SSIS-Package1-{8E0CCE76-9CA2-4C39-964A-47F97309A8C9}localhost.SolidDW.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3ayau1Jj+keNbFZXNXdXBAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC21Q3RR/6RNN/cGwzmsBy0Eb4il2rLIosHUPY0I+E5tAAAAAAOgAAAAAIAACAAAAAc5CrQFgq5mintZ+TeQRQutfJQQ6OmpgsYyUSKM6QVPBAAAADfLX9GIykrP4CNvCPpSCnVQAAAAMQCWOfqJamYhXqEuqaVycwuBhZAWFiQE9Kr89uIwABXR/dWsEkdS6A6tc/h0sQjum2MsbDl9WtJPU0GP8Wm0Cg</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{8E0CCE76-9CA2-4C39-964A-47F97309A8C9}localhost.SolidDW.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -914,6 +904,10 @@ where [refTable].[ServicioID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Clean-up Staging"
+          TopLeft="392.499978554746,157.733332236475" />
+        <NodeLayout
           Size="174.4,41.6"
           Id="Package\Get DB Row Version"
           TopLeft="390.833311979142,25.1333331585593" />
@@ -921,6 +915,18 @@ where [refTable].[ServicioID] = ?</property>
           Size="179.2,41.6"
           Id="Package\Get Last Row Version"
           TopLeft="383.333312388924,89.2666660459174" />
+        <NodeLayout
+          Size="146.4,41.6"
+          Id="Package\Load Servicios"
+          TopLeft="395.833311705954,222.733331784474" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Sincronizar Staging"
+          TopLeft="385.833312252331,292.933331296311" />
+        <NodeLayout
+          Size="144.8,41.6"
+          Id="Package\Update Config"
+          TopLeft="403.333311296173,363.999997468789" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="475.483312184033,66.7333331585593">
@@ -943,10 +949,6 @@ where [refTable].[ServicioID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Clean-up Staging"
-          TopLeft="392.499978554746,157.733332236475" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="472.316645471835,130.866666045917">
@@ -969,10 +971,6 @@ where [refTable].[ServicioID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="146.4,41.6"
-          Id="Package\Load Servicios"
-          TopLeft="395.833311705954,222.733331784474" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="470.36664513035,199.333332236475">
@@ -995,10 +993,6 @@ where [refTable].[ServicioID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Sincronizar Staging"
-          TopLeft="385.833312252331,292.933331296311" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="469.633311979142,264.333331784474">
@@ -1021,10 +1015,6 @@ where [refTable].[ServicioID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="144.8,41.6"
-          Id="Package\Update Config"
-          TopLeft="403.333311296173,363.999997468789" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="472.983311774252,334.533331296311">
@@ -1169,20 +1159,12 @@ where [refTable].[ServicioID] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Servicios\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Load Servicios\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1192,7 +1174,7 @@ where [refTable].[ServicioID] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1200,7 +1182,7 @@ where [refTable].[ServicioID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Servicios\Load Staging">
+    design-time-name="Package\Load Servicios\Load Servicios">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1213,7 +1195,15 @@ where [refTable].[ServicioID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Servicios\Load Servicios">
+    design-time-name="Package\Load Servicios\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Servicios\Load Staging">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
