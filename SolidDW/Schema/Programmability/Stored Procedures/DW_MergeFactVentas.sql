@@ -4,7 +4,7 @@ BEGIN
 	UPDATE fv
 	SET 
 		TipoItemString = sv.TipoItemString,
-		des_Venta = sv.des_Venta,
+		desc_Venta = sv.desc_Venta,
 		FechaVentaKey = sv.FechaVentaKey,
 		sub_total = sv.sub_total,
 		total_Venta = sv.total_Venta,
