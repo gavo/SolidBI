@@ -13,4 +13,5 @@
 	[nombre_grupo_producto] [varchar](255) NULL,
 	[nombre_proveedor] [varchar](255) NULL,
 
-)
+);
+GO

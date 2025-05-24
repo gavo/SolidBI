@@ -62,7 +62,6 @@
     <Folder Include="Schema\Programmability" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schema\Tables\almacenes.sql" />
     <Build Include="Schema\Tables\clientes.sql" />
     <Build Include="Schema\Tables\fabricantes.sql" />
     <Build Include="Schema\Tables\facturas.sql" />
@@ -79,5 +78,7 @@
     <Build Include="Schema\Programmability\GetProductoChangesByRowVersion.sql" />
     <Build Include="Schema\Programmability\GetServicioChangesByRowVersion.sql" />
     <Build Include="Schema\Programmability\GetVentasChangesByRowVersion.sql" />
+    <Build Include="Schema\Programmability\GetVendedorChangesByRowVersion.sql" />
+    <Build Include="Schema\Tables\vendedores.sql" />
   </ItemGroup>
 </Project>

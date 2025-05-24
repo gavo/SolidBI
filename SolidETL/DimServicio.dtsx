@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="46"
-  DTS:VersionGUID="{DD14C49D-E693-4C59-82B3-064C4501BDC8}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{ACCAFC73-3F32-403E-82FE-FBB78A33EEF8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{E188E27D-9DD3-4DDD-9587-B43C7905844D}localhost.solid.sa;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidOLTP;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{E188E27D-9DD3-4DDD-9587-B43C7905844D}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager

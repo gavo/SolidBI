@@ -84,6 +84,8 @@
     <Build Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
     <Build Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
     <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimCliente.sql" />
+    <Build Include="Schema\Tables\dbo\DimVendedor.sql" />
+    <Build Include="Schema\Tables\staging\staging.vendedor.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SolidDW.refactorlog" />

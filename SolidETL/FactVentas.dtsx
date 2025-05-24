@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="52"
-  DTS:VersionGUID="{7AEDEC2E-B59F-4CDF-B7B9-AEFD4AD1FCF2}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{3594E852-A2C3-4AF3-B839-BAFDA2989B35}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{3054E4A0-3D1E-4F90-A60F-4EDB155790D0}localhost.solid.sa;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidOLTP;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{3054E4A0-3D1E-4F90-A60F-4EDB155790D0}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -411,6 +411,15 @@
                       precision="38"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VendedorKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[VendedorKey]"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].Columns[VendedorKey]"
+                      name="VendedorKey"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -522,6 +531,10 @@
                       name="total_Factura"
                       precision="38"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Output].ExternalColumns[VendedorKey]"
+                      dataType="i8"
+                      name="VendedorKey" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -582,6 +595,11 @@
                       dataType="i8"
                       lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ClienteKey]"
                       name="ClienteKey" />
+                    <outputColumn
+                      refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[VendedorKey]"
+                      dataType="i8"
+                      lineageId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[VendedorKey]"
+                      name="VendedorKey" />
                     <outputColumn
                       refId="Package\Load Ventas\Get Ventas.Outputs[OLE DB Source Error Output].Columns[ProductoKey]"
                       dataType="i8"

@@ -9,4 +9,5 @@
 	tipo_documento VARCHAR(255) NOT NULL,
 	descuento_grupo_cliente NUMERIC(38, 2) NULL,
 	nombre_grupo_cliente VARCHAR(255) NULL,
-)
+);
+GO

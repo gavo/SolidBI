@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimProducto"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{6FCBCC38-0F90-48C3-AE01-123D08A580EF}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{336FEA66-4326-45BE-AD34-28F154B27978}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=solid;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimProducto-{FA090FB0-D4FC-412D-9134-C0C3066E8B82}localhost.solid.sa;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=SolidOLTP;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimProducto-{FA090FB0-D4FC-412D-9134-C0C3066E8B82}localhost.solid.sa;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager

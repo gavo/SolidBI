@@ -7,6 +7,13 @@
 GO
 IF NOT EXISTS(SELECT TOP(1) 1
               FROM [dbo].[PackageConfig]
+			  WHERE [TableName] = 'Vendedor')
+ BEGIN
+	INSERT [dbo].[PackageConfig] ([TableName], [LastRowVersion]) VALUES ('Vendedor', 0)
+ END
+GO
+IF NOT EXISTS(SELECT TOP(1) 1
+              FROM [dbo].[PackageConfig]
 			  WHERE [TableName] = 'Servicio')
  BEGIN
 	INSERT [dbo].[PackageConfig] ([TableName], [LastRowVersion]) VALUES ('Servicio', 0)

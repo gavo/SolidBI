@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[DimVendedor]
+(
+	VendedorSK BIGINT IDENTITY(1,1) NOT NULL CONSTRAINT PK_DimVendedor PRIMARY KEY,
+	VendedorID BIGINT NOT NULL,
+	nombre VARCHAR(255) NOT NULL,
+	apellido VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	telefono VARCHAR(255) NOT NULL,
+);
+GO
+
